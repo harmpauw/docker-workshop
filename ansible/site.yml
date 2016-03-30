@@ -1,0 +1,8 @@
+- hosts: clients
+  remote_user: workshop
+  become: yes
+  become_method: sudo
+  roles:
+    - docker
+    - rdp
+    - workshop

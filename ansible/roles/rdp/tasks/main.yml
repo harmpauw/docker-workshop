@@ -1,0 +1,10 @@
+---
+- name: Ensure Desktop and XRDP are installed.
+  apt: pkg={{ item }} state=installed
+  with_items:
+    - xubuntu-desktop
+    - xrdp 
+
+- name: Ensure xfce4 window manager is default when logging installed
+  become: no
+  template: src=.session dest=~/.session

@@ -1,0 +1,16 @@
+---
+- name: Ensure development packages are installed
+  apt: pkg={{ item }} state=present
+  with_items:
+    - openjdk-8-jdk
+    - git
+    - maven
+    - mysql-client
+
+- name: Clone Workshop Git repo
+  become: no
+  git: repo=https://github.com/harmpauw/docker-workshop.git dest=~/docker-workshop 
+
+- name: Clone Sprint Petclinic Git repo
+  become: no
+  git: repo=https://github.com/harmpauw/spring-petclinic.git dest=~/spring-petclinic

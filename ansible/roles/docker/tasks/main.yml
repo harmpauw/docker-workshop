@@ -1,0 +1,28 @@
+---
+- name: Upgrade dist
+  apt: upgrade=dist
+
+- name: Ensure lxc-docker is not installed
+  apt: pkg=lxc-docker state=absent
+
+- name: Add Docker apt repository key.
+  apt_key: keyserver="hkp://p80.pool.sks-keyservers.net" id=58118E89F3A912897C070ADBF76221572C52609D
+
+- name: Add Docker apt repository.
+  apt_repository:
+    repo: "deb https://apt.dockerproject.org/repo ubuntu-wily main"
+    state: present
+    update_cache: yes
+
+- name: Ensure docker is installed.
+  apt: pkg=docker-engine state=installed update_cache=yes
+
+- name: Ensure docker-compose  is installed.
+  apt: pkg=docker-compose state=installed update_cache=yes
+
+- name: Add workshop user to docker group
+  user: name=workshop group=docker append=yes
+
+- name: Ensure Docker is started and runs on startup.
+  service: name=docker state=started enabled=yes
+
