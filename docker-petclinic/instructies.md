@@ -1,3 +1,4 @@
+# spring petclinic builden
 mvn package -DskipTests package
 
 # mappen aanmaken
@@ -13,6 +14,7 @@ docker run --net=petclinic -d --name mysql -v /home/workshop/docker/database_dat
 
 # image maken op basis van tomcat en daarna starten
 petclinic.war kopieeren naar app/ 
+Dockerfile maken (zie voorbeeld in deze repo)
 docker build -t petclinic app/
 docker run --net=petclinic --rm -it --link mysql:mysql -p 8080:8080 petclinic
 
@@ -24,3 +26,5 @@ docker rm mysql
 docker network rm petclinic
 
 # docker-compose
+docker-compose.yml aanmaken  (zie voorbeeld in deze repo)
+docker-compose -d up
